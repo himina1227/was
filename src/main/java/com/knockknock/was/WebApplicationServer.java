@@ -31,10 +31,21 @@ public class WebApplicationServer {
                     BufferedReader br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
                     DataOutputStream dos = new DataOutputStream(out);
 
-                    String line;
-                    while ((line = br.readLine()) != "") {
-                        System.out.println(line);
+                    HttpRequest httpRequest = new HttpRequest(br);
+
+                    if (httpRequest.isGetRequest() && httpRequest.matchPath("/calculate")) {
+                        QueryStrings queryStrings = httpRequest.getQueryStrings();
+
+                        // 비지니스 로직을 실행 수
+                        byte[] body = String.valueOf("body").getBytes();
+                        HttpResponse response = new HttpResponse(dos);
+                        response.response200Header("application/json", body.length);
+                        response.responseBody(body);
                     }
+//                    String line;
+//                    while ((line = br.readLine()) != "") {
+//                        System.out.println(line);
+//                    }
                 }
             }
         } catch (IOException e) {

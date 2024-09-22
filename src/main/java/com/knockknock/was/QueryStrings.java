@@ -1,9 +1,12 @@
 package com.knockknock.was;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Getter
 public class QueryStrings {
     private List<QueryString> queryStrings = new ArrayList<>();
 
@@ -17,5 +20,13 @@ public class QueryStrings {
                     }
                     queryStrings.add(new QueryString(values[0], values[1]));
                 });
+    }
+
+    public String getValue(String key) {
+        return this.queryStrings.stream()
+                .filter(queryString -> queryString.exists(key))
+                .map(QueryString::getValue)
+                .findFirst()
+                .orElse(null);
     }
 }
