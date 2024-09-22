@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WasApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WasApplication.class, args);
+        new WebApplicationServer(8080).start();
+//        SpringApplication.run(WasApplication.class, args);
     }
 
 }
