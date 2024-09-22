@@ -29,4 +29,12 @@ public class RequestLine {
             this.quertString = urlPathTokens[1];
         }
     }
+
+    public boolean isGetRequest() {
+        return "GET".equals(method);
+    }
+
+    public boolean mathPath(String requestPath) {
+        return requestPath.equals(urlPath);
+    }
 }
